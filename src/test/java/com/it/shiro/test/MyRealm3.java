@@ -4,23 +4,20 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.realm.Realm;
 
 /**
- * <P>
- *     自定义Realm配置
- * </P>
  * @Author 王文龙
- * @Date 2019-11-20 16:21
+ * @Date 2019-11-21 09:59
  */
-public class MyRealm1 implements Realm {
+public class MyRealm3 implements Realm {
+
 
     @Override
     public String getName() {
-        return "MyRealm1";
+        return "myrealm3";
     }
 
     @Override
     public boolean supports(AuthenticationToken token) {
-        //仅支持 UsernamePasswordToken 类型的 Token
-        return token instanceof UsernamePasswordToken;
+        return token instanceof UsernamePasswordToken;//仅支持usernamePasswordToken类型的Token
     }
 
     @Override
@@ -28,12 +25,12 @@ public class MyRealm1 implements Realm {
         String username = (String)token.getPrincipal();//得到用户名
         String password = new String((char[]) token.getCredentials());//得到密码
         if (!"zhang".equals(username)){
-            throw new UnknownAccountException("用户名错误");//用户名错误抛出异常
+            throw new UnknownAccountException();//用户名错误抛出的异常
         }
         if (!"123".equals(password)){
-            throw new IncorrectCredentialsException("密码错误");//密码错误抛出异常
+            throw new IncorrectCredentialsException();//密码错误抛出的异常
         }
-        // 如果身份认证验证成功，返回一个AuthenticationInfo实现；
-        return new SimpleAuthenticationInfo(username,password,getName());
+        //如果身份认证验证成功，返回一个AuthenticationInfo实现
+        return new SimpleAuthenticationInfo(username + "@163.com", password, getName());
     }
 }
