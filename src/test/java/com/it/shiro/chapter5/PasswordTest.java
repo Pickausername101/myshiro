@@ -13,4 +13,10 @@ public class PasswordTest extends BaseTest {
     public void testPasswordServiceWithMyRealm(){
         login("classpath:shiro-passwordservice.ini.properties","wu","123");
     }
+
+    @Test
+    public void testHashedCredentialsMatcherWithMyRealm2() {
+        //使用testGeneratePassword生成的散列密码
+        login("classpath:shiro-hashedCredentialsMatcher.ini.properties", "liu", "123");
+    }
 }
