@@ -18,4 +18,8 @@ public class Sys_users {
     private String username;
     private String password;
     private String salt;
+
+    public String getCredentialsSalt() {
+        return username + salt;
+    }
 }
